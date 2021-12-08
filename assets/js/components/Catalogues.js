@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-class Users extends Component { 
+class Catalogues extends Component { 
 
  constructor() {
  	super();
- 	this.state = { users:[], loading: true};
+ 	this.state = { catalogues:[], loading: true};
  }
 
  componentDidMount(){
- 	this.getUsers();
+ 	this.getCatalogues();
  }
 
- getUsers(){
- 	axios.get('http://localhost:8000/api/users').then(users => {
- 		this.setState({ users: users.data, loading: false})
+ getCatalogues(){
+ 	axios.get('http://localhost:8000/api/catalogues').then(catalogues => {
+ 		this.setState({ catalogues: catalogues.data, loading: false})
  	})
  }
 
@@ -27,8 +27,8 @@ class Users extends Component {
                 <section className="row-section">
                     <div className="container">
                         <div className="row">
-                            <h2 className="text-center"><span>List of users</span>Created with <i
-                                className="fa fa-heart"></i> by yemiwebby</h2>
+                            <h2 className="text-center"><span>Liste des catalogues voitures</span>
+                            CATALOGUES VOITURES</h2>
                         </div>
                         {loading ? (
                             <div className={'row text-center'}>
@@ -36,21 +36,21 @@ class Users extends Component {
                             </div>
                         ) : (
                             <div className={'row'}>
-                                { this.state.users.map(user =>
-                                    <div className="col-md-10 offset-md-1 row-block" key={user.id}>
+                                { this.state.catalogues.map(catalogue =>
+                                    <div className="col-md-10 offset-md-1 row-block" key={catalogue.id}>
                                         <ul id="sortable">
                                             <li>
                                                 <div className="media">
                                                     <div className="media-left align-self-center">
                                                         <img className="rounded-circle"
-                                                             src={user.imageURL}/>
+                                                             src={catalogue.imageURL}/>
                                                     </div>
                                                     <div className="media-body">
-                                                        <h4>{user.name}</h4>
-                                                        <p>{user.description}</p>
+                                                        <h4>{catalogue.name}</h4>
+                                                        <p>{catalogue.description}</p>
                                                     </div>
                                                     <div className="media-right align-self-center">
-                                                        <a href="#" className="btn btn-default">Contact Now</a>
+                                                        <a href="#" className="btn btn-default">Commenter</a>
                                                     </div>
                                                 </div>
                                             </li>
@@ -65,4 +65,4 @@ class Users extends Component {
         )	
  }
 }
-export default Users;
+export default Catalogues;
